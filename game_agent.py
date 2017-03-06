@@ -38,6 +38,8 @@ def custom_score(game, player):
     """
 
     # TODO: finish this function!
+    print(game)
+    print(player)
     raise NotImplementedError
 
 
