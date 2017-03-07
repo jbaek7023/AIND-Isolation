@@ -132,14 +132,14 @@ class CustomPlayer:
             # when the timer gets close to expiring
 
             # game = Isolation.Board
-            self.minimax(game, 1)
+            _, best_move = self.minimax(game, 1)
 
         except Timeout:
             # Handle any actions required at timeout, if necessary
             pass
 
         # Return the best move from the last completed search iteration
-        return (0,0)
+        return best_move
 
     def minimax(self, game, depth, maximizing_player=True):
         """Implement the minimax search algorithm as described in the lectures.
@@ -198,7 +198,7 @@ class CustomPlayer:
                     # score of the next move
                     score = self.score(game.forecast_move(move), self)
 
-                    if score > current_min_value:
+                    if score < current_min_value:
                         current_min_value, current_best_move = score, move
                 return current_min_value, current_best_move
 
