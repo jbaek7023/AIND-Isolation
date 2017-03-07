@@ -38,8 +38,6 @@ def custom_score(game, player):
     """
 
     # TODO: finish this function!
-    print(game)
-    print(player)
     raise NotImplementedError
 
 
@@ -125,20 +123,23 @@ class CustomPlayer:
         # Perform any required initializations, including selecting an initial
         # move from the game board (i.e., an opening book), or returning
         # immediately if there are no legal moves
-
+        if not legal_moves:
+            return (-1, -1)
         try:
             # The search method call (alpha beta or minimax) should happen in
             # here in order to avoid timeout. The try/except block will
             # automatically catch the exception raised by the search method
             # when the timer gets close to expiring
-            pass
+
+            # game = Isolation.Board
+            self.minimax(game, 1)
 
         except Timeout:
             # Handle any actions required at timeout, if necessary
             pass
 
         # Return the best move from the last completed search iteration
-        raise NotImplementedError
+        return (0,0)
 
     def minimax(self, game, depth, maximizing_player=True):
         """Implement the minimax search algorithm as described in the lectures.
@@ -173,6 +174,33 @@ class CustomPlayer:
         """
         if self.time_left() < self.TIMER_THRESHOLD:
             raise Timeout()
+
+        legal_moves = game.get_legal_moves()
+
+        if depth == 1 :
+        # Mini-Max Algorithm :
+        # https://github.com/aimacode/aima-pseudocode/blob/master/md/Minimax-Decision.md
+            if maximizing_player == True:
+                current_max_value = float("-inf")
+                current_best_move = (-1, -1)
+                for move in legal_moves:
+                    # score of the next move
+                    score = self.score(game.forecast_move(move), self)
+
+                    if score > current_max_value:
+                        current_max_value, current_best_move = score, move
+                return current_max_value, current_best_move
+            # Min Node (Beta Node)
+            else:
+                current_min_value = float("inf")
+                current_best_move = (-1, -1)
+                for move in legal_moves:
+                    # score of the next move
+                    score = self.score(game.forecast_move(move), self)
+
+                    if score > current_min_value:
+                        current_min_value, current_best_move = score, move
+                return current_min_value, current_best_move
 
         # TODO: finish this function!
         raise NotImplementedError
