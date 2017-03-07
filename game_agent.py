@@ -272,6 +272,55 @@ class CustomPlayer:
         if self.time_left() < self.TIMER_THRESHOLD:
             raise Timeout()
 
+        legal_moves = game.get_legal_moves()
 
+        # Mini-Max Algorithm :
+        # https://github.com/aimacode/aima-pseudocode/blob/master/md/Minimax-Decision.md
+
+        # This is 'Terminal' Test
+        if depth == 1 :
+            if maximizing_player == True:
+                current_max_value = float("-inf")
+                current_best_move = (-1, -1)
+                for move in legal_moves:
+                    # score of the next move
+                    score = self.score(game.forecast_move(move), self)
+                    if score > current_max_value:
+                        current_max_value, current_best_move = score, move
+                return current_max_value, current_best_move
+            # Min Node (Beta Node)
+            else:
+                current_min_value = float("inf")
+                current_best_move = (-1, -1)
+                for move in legal_moves:
+                    # score of the next move
+                    score = self.score(game.forecast_move(move), self)
+
+                    if score < current_min_value:
+                        current_min_value, current_best_move = score, move
+                return current_min_value, current_best_move
+
+        if maximizing_player == True:
+            current_max_value = float("-inf")
+            current_best_move = (-1, -1)
+            for move in legal_moves:
+                # score of the next move (Recursive Call)
+                # Performs minimax 'depth' times
+                score, _ = self.minimax(game.forecast_move(move), depth-1, maximizing_player=False)
+
+                if score > current_max_value:
+                    current_max_value, current_best_move = score, move
+            return current_max_value, current_best_move
+        # Min Node (Beta Node)
+        else:
+            current_min_value = float("inf")
+            current_best_move = (-1, -1)
+            for move in legal_moves:
+                # score of the next move (Recursive Call)
+                score, _ = self.minimax(game.forecast_move(move), depth - 1, maximizing_player=True)
+
+                if score < current_min_value:
+                    current_min_value, current_best_move = score, move
+            return current_min_value, current_best_move
         # TODO: finish this function!
         raise NotImplementedError
