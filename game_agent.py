@@ -123,6 +123,7 @@ class CustomPlayer:
         # Perform any required initializations, including selecting an initial
         # move from the game board (i.e., an opening book), or returning
         # immediately if there are no legal moves
+        best_move = (-1, -1)
         if not legal_moves:
             return (-1, -1)
         try:
@@ -131,15 +132,31 @@ class CustomPlayer:
             # automatically catch the exception raised by the search method
             # when the timer gets close to expiring
 
+            # Iteractive Deepening Search Algorithm
+            # https://github.com/aimacode/aima-pseudocode/blob/master/md/Iterative-Deepening-Search.md
             if self.iterative:
+                depth = 1
                 if self.method == 'minimax':
-                    pass
+                    while True:
+                        current_max_value, best_move = self.minimax(game, depth)
+                        if current_max_value == float("-inf"):
+                            break
+                        depth += 1
                 elif self.method == 'alphabeta':
-                    pass
+                    while True:
+                        current_max_value, best_move = self.alphabeta(game, depth)
+                        if current_max_value == float("-inf"):
+                            break
+                        depth += 1
                 else:
                     print("Not available method")
             else:
-                pass
+                if self.method == 'minimax':
+                    _, best_move = self.minimax(game, self.search_depth)
+                elif self.method == 'alphabeta':
+                    _, best_move = self.alphabeta(game, self.search_depth)
+                else:
+                    print("Not available method")
             _, best_move = self.minimax(game, 1)
         except Timeout:
             # Handle any actions required at timeout, if necessary
