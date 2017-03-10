@@ -131,11 +131,16 @@ class CustomPlayer:
             # automatically catch the exception raised by the search method
             # when the timer gets close to expiring
 
-
-
-            # game is Isolation.Board
+            if self.iterative:
+                if self.method == 'minimax':
+                    pass
+                elif self.method == 'alphabeta':
+                    pass
+                else:
+                    print("Not available method")
+            else:
+                pass
             _, best_move = self.minimax(game, 1)
-
         except Timeout:
             # Handle any actions required at timeout, if necessary
             pass
@@ -182,11 +187,12 @@ class CustomPlayer:
         # Mini-Max Algorithm :
         # https://github.com/aimacode/aima-pseudocode/blob/master/md/Minimax-Decision.md
 
+        current_max_value = float("-inf")
+        current_best_move = (-1, -1)
+        current_min_value = float("inf")
         # This is 'Terminal' Test
         if depth == 1 :
             if maximizing_player == True:
-                current_max_value = float("-inf")
-                current_best_move = (-1, -1)
                 for move in legal_moves:
                     # score of the next move
                     score = self.score(game.forecast_move(move), self)
@@ -195,8 +201,6 @@ class CustomPlayer:
                 return current_max_value, current_best_move
             # Min Node (Beta Node)
             else:
-                current_min_value = float("inf")
-                current_best_move = (-1, -1)
                 for move in legal_moves:
                     # score of the next move
                     score = self.score(game.forecast_move(move), self)
@@ -206,8 +210,6 @@ class CustomPlayer:
                 return current_min_value, current_best_move
 
         if maximizing_player == True:
-            current_max_value = float("-inf")
-            current_best_move = (-1, -1)
             for move in legal_moves:
                 # score of the next move (Recursive Call)
                 # Performs minimax 'depth' times
@@ -218,8 +220,6 @@ class CustomPlayer:
             return current_max_value, current_best_move
         # Min Node (Beta Node)
         else:
-            current_min_value = float("inf")
-            current_best_move = (-1, -1)
             for move in legal_moves:
                 # score of the next move (Recursive Call)
                 score, _ = self.minimax(game.forecast_move(move), depth - 1, maximizing_player=True)
@@ -228,7 +228,7 @@ class CustomPlayer:
                     current_min_value, current_best_move = score, move
             return current_min_value, current_best_move
 
-        # Not reachable here
+        # Not reachable
         raise NotImplementedError
 
     def alphabeta(self, game, depth, alpha=float("-inf"), beta=float("inf"), maximizing_player=True):
@@ -274,53 +274,62 @@ class CustomPlayer:
 
         legal_moves = game.get_legal_moves()
 
-        # Mini-Max Algorithm :
-        # https://github.com/aimacode/aima-pseudocode/blob/master/md/Minimax-Decision.md
+        # Alpha-beta Algorithm :
+        # https://github.com/aimacode/aima-pseudocode/blob/master/md/Alpha-Beta-Search.md
 
+        current_max_value = float("-inf")
+        current_best_move = (-1, -1)
+        current_min_value = float("inf")
         # This is 'Terminal' Test
         if depth == 1 :
             if maximizing_player == True:
-                current_max_value = float("-inf")
-                current_best_move = (-1, -1)
                 for move in legal_moves:
                     # score of the next move
                     score = self.score(game.forecast_move(move), self)
+
+                    if score >= beta:
+                        return score, move
                     if score > current_max_value:
                         current_max_value, current_best_move = score, move
                 return current_max_value, current_best_move
             # Min Node (Beta Node)
             else:
-                current_min_value = float("inf")
-                current_best_move = (-1, -1)
                 for move in legal_moves:
                     # score of the next move
                     score = self.score(game.forecast_move(move), self)
+
+                    if score <= alpha:
+                        return score, move
 
                     if score < current_min_value:
                         current_min_value, current_best_move = score, move
                 return current_min_value, current_best_move
 
         if maximizing_player == True:
-            current_max_value = float("-inf")
-            current_best_move = (-1, -1)
             for move in legal_moves:
                 # score of the next move (Recursive Call)
                 # Performs minimax 'depth' times
-                score, _ = self.minimax(game.forecast_move(move), depth-1, maximizing_player=False)
+                score, _ = self.alphabeta(game.forecast_move(move), depth-1, alpha, beta, maximizing_player=False)
+
+                if score >= beta:
+                    return score, move
 
                 if score > current_max_value:
                     current_max_value, current_best_move = score, move
+                alpha = max(alpha, current_max_value)
             return current_max_value, current_best_move
         # Min Node (Beta Node)
         else:
-            current_min_value = float("inf")
-            current_best_move = (-1, -1)
             for move in legal_moves:
                 # score of the next move (Recursive Call)
-                score, _ = self.minimax(game.forecast_move(move), depth - 1, maximizing_player=True)
+                score, _ = self.alphabeta(game.forecast_move(move), depth-1, alpha, beta, maximizing_player=True)
+
+                if score <= alpha:
+                    return score, move
 
                 if score < current_min_value:
                     current_min_value, current_best_move = score, move
+
+                beta = min(beta, current_min_value)
             return current_min_value, current_best_move
-        # TODO: finish this function!
         raise NotImplementedError
