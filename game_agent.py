@@ -43,20 +43,44 @@ def custom_score(game, player):
 
 def evaluation_function1(game, player):
     """ This is identical to improved_score(game, player) in sample_player.py
-    Playing Matches:
+*************************
+ Evaluating: ID_Improved
+*************************
+
+Playing Matches:
 ----------
-  Match 1:   Student   vs   Random    	Result: 16 to 4
-  Match 2:   Student   vs   MM_Null   	Result: 16 to 4
-  Match 3:   Student   vs   MM_Open   	Result: 14 to 6
-  Match 4:   Student   vs MM_Improved 	Result: 12 to 8
-  Match 5:   Student   vs   AB_Null   	Result: 14 to 6
-  Match 6:   Student   vs   AB_Open   	Result: 10 to 10
-  Match 7:   Student   vs AB_Improved 	Result: 12 to 8
+  Match 1: ID_Improved vs   Random    	Result: 17 to 3
+  Match 2: ID_Improved vs   MM_Null   	Result: 15 to 5
+  Match 3: ID_Improved vs   MM_Open   	Result: 12 to 8
+  Match 4: ID_Improved vs MM_Improved 	Result: 10 to 10
+  Match 5: ID_Improved vs   AB_Null   	Result: 15 to 5
+  Match 6: ID_Improved vs   AB_Open   	Result: 14 to 6
+  Match 7: ID_Improved vs AB_Improved 	Result: 11 to 9
 
 
 Results:
 ----------
-Student             67.86%
+ID_Improved         67.14%
+
+*************************
+   Evaluating: Student
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   Random    	Result: 13 to 7
+  Match 2:   Student   vs   MM_Null   	Result: 17 to 3
+  Match 3:   Student   vs   MM_Open   	Result: 12 to 8
+  Match 4:   Student   vs MM_Improved 	Result: 11 to 9
+  Match 5:   Student   vs   AB_Null   	Result: 14 to 6
+  Match 6:   Student   vs   AB_Open   	Result: 12 to 8
+  Match 7:   Student   vs AB_Improved 	Result: 9 to 11
+
+
+Results:
+----------
+Student             62.86%
+
 
     """
     if game.is_loser(player):
@@ -71,25 +95,44 @@ Student             67.86%
 
 def evaluation_function2(game, player):
     """ Chase After the opponent
-    *************************
+*************************
+ Evaluating: ID_Improved
+*************************
+
+Playing Matches:
+----------
+  Match 1: ID_Improved vs   Random    	Result: 16 to 4
+  Match 2: ID_Improved vs   MM_Null   	Result: 15 to 5
+  Match 3: ID_Improved vs   MM_Open   	Result: 12 to 8
+  Match 4: ID_Improved vs MM_Improved 	Result: 12 to 8
+  Match 5: ID_Improved vs   AB_Null   	Result: 14 to 6
+  Match 6: ID_Improved vs   AB_Open   	Result: 13 to 7
+  Match 7: ID_Improved vs AB_Improved 	Result: 12 to 8
+
+
+Results:
+----------
+ID_Improved         67.14%
+
+*************************
    Evaluating: Student
 *************************
 
 Playing Matches:
 ----------
-  Match 1:   Student   vs   Random    	Result: 17 to 3
-  Match 2:   Student   vs   MM_Null   	Result: 13 to 7
-  Match 3:   Student   vs   MM_Open   	Result: 14 to 6
+  Match 1:   Student   vs   Random    	Result: 16 to 4
+  Match 2:   Student   vs   MM_Null   	Result: 18 to 2
+  Match 3:   Student   vs   MM_Open   	Result: 11 to 9
   Match 4:   Student   vs MM_Improved 	Result: 11 to 9
   Match 5:   Student   vs   AB_Null   	Result: 15 to 5
-  Match 6:   Student   vs   AB_Open   	Result: 14 to 6
-  Match 7:   Student   vs AB_Improved 	Result: 13 to 7
+  Match 6:   Student   vs   AB_Open   	Result: 12 to 8
+  Match 7:   Student   vs AB_Improved 	Result: 11 to 9
 
 
 Results:
 ----------
-Student             69.29%
-about 2 percents improved
+Student             67.14%
+
     """
     if game.is_loser(player):
         return float("-inf")
@@ -104,6 +147,26 @@ about 2 percents improved
 
 def evaluation_function3(game, player):
     """ This is identical to improved_score(game, player) in sample_player.py
+
+*************************
+ Evaluating: ID_Improved
+*************************
+
+Playing Matches:
+----------
+  Match 1: ID_Improved vs   Random    	Result: 19 to 1
+  Match 2: ID_Improved vs   MM_Null   	Result: 12 to 8
+  Match 3: ID_Improved vs   MM_Open   	Result: 14 to 6
+  Match 4: ID_Improved vs MM_Improved 	Result: 13 to 7
+  Match 5: ID_Improved vs   AB_Null   	Result: 12 to 8
+  Match 6: ID_Improved vs   AB_Open   	Result: 11 to 9
+  Match 7: ID_Improved vs AB_Improved 	Result: 13 to 7
+
+
+Results:
+----------
+ID_Improved         67.14%
+
 *************************
    Evaluating: Student
 *************************
@@ -132,9 +195,6 @@ Student             71.43%
 
     own_moves = len(game.get_legal_moves(player))
     opp_moves = len(game.get_legal_moves(game.get_opponent(player)))
-
-    # get a depth
-
     # if the depth between moves are different and the scores is same, we'd rather choose the move which has not deeper, because it can finish the game earlier.
 
     # we can get the depth from the remaining spaces.
@@ -151,10 +211,24 @@ def evaluation_function4(game, player):
     :param game:
     :param player:
     :return:
-    *************************
 *************************
-   Evaluating: Student
+ Evaluating: ID_Improved
 *************************
+
+Playing Matches:
+----------
+  Match 1: ID_Improved vs   Random    	Result: 16 to 4
+  Match 2: ID_Improved vs   MM_Null   	Result: 14 to 6
+  Match 3: ID_Improved vs   MM_Open   	Result: 11 to 9
+  Match 4: ID_Improved vs MM_Improved 	Result: 12 to 8
+  Match 5: ID_Improved vs   AB_Null   	Result: 12 to 8
+  Match 6: ID_Improved vs   AB_Open   	Result: 9 to 11
+  Match 7: ID_Improved vs AB_Improved 	Result: 12 to 8
+
+
+Results:
+----------
+ID_Improved         61.43%
 
 *************************
    Evaluating: Student
@@ -192,16 +266,12 @@ Student             75.00%
     # get the position array
     center_spaces = [(3, 3)]
 
-    #if its depth are less than four (my assumption), it's ALWAYS better to move to the center position
+    #if its depth is 3, it's ALWAYS better to move to the center position ( my assumption )
     center_value = 0
-    # print(approx_depth)
-    # I don't want to check player's location every time, so I seperated two statements to different if statements.
-    #somehow the approx_depth print 3 for the depth of 1
-
+    #the game is set to pick random positions for players
     if approx_depth == 3:
         if game.get_player_location(player) in center_spaces:
             center_value = 99999
-    # print(float(center_value + own_moves - opp_moves - approx_depth*0.01))
     return float(center_value + own_moves - opp_moves - approx_depth*0.01)
 
 def evaluation_function5(game, player):
@@ -209,27 +279,44 @@ def evaluation_function5(game, player):
     :param game:
     :param player:
     :return:
-    *************************
+*************************
+ Evaluating: ID_Improved
+*************************
+
+Playing Matches:
+----------
+  Match 1: ID_Improved vs   Random    	Result: 15 to 5
+  Match 2: ID_Improved vs   MM_Null   	Result: 15 to 5
+  Match 3: ID_Improved vs   MM_Open   	Result: 12 to 8
+  Match 4: ID_Improved vs MM_Improved 	Result: 10 to 10
+  Match 5: ID_Improved vs   AB_Null   	Result: 14 to 6
+  Match 6: ID_Improved vs   AB_Open   	Result: 10 to 10
+  Match 7: ID_Improved vs AB_Improved 	Result: 11 to 9
+
+
+Results:
+----------
+ID_Improved         62.14%
+
 *************************
    Evaluating: Student
 *************************
 
 Playing Matches:
 ----------
-  Match 1:   Student   vs   Random    	Result: 15 to 5
-  Match 2:   Student   vs   MM_Null   	Result: 12 to 8
-  Match 3:   Student   vs   MM_Open   	Result: 13 to 7
-  Match 4:   Student   vs MM_Improved 	Result: 15 to 5
-  Match 5:   Student   vs   AB_Null   	Result: 15 to 5
-  Match 6:   Student   vs   AB_Open   	Result: 11 to 9
-  Match 7:   Student   vs AB_Improved 	Result: 11 to 9
+  Match 1:   Student   vs   Random    	Result: 14 to 6
+  Match 2:   Student   vs   MM_Null   	Result: 16 to 4
+  Match 3:   Student   vs   MM_Open   	Result: 14 to 6
+  Match 4:   Student   vs MM_Improved 	Result: 14 to 6
+  Match 5:   Student   vs   AB_Null   	Result: 16 to 4
+  Match 6:   Student   vs   AB_Open   	Result: 13 to 7
+  Match 7:   Student   vs AB_Improved 	Result: 13 to 7
 
 
 Results:
 ----------
-Student             65.71%
+Student             71.43%
 
-Dramatically Decrease.
 
     """
     if game.is_loser(player):
@@ -243,19 +330,13 @@ Dramatically Decrease.
 
     approx_depth = 49 - len(game.get_blank_spaces())
 
-    # get the position array
     center_spaces = [(3, 3)]
 
-    #if its depth are less than four (my assumption), it's ALWAYS better to move to the center position
     center_value = 0
-    # print(approx_depth)
-    # I don't want to check player's location every time, so I seperated two statements to different if statements.
-    #somehow the approx_depth print 3 for the depth of 1
 
     if approx_depth <= 5:
         if game.get_player_location(player) in center_spaces:
             center_value = 99999
-    # print(float(center_value + own_moves - opp_moves - approx_depth*0.01))
     return float(center_value + own_moves - opp_moves - approx_depth*0.01)
 
 def evaluation_function6(game, player):
@@ -263,10 +344,24 @@ def evaluation_function6(game, player):
     :param game:
     :param player:
     :return:
-    *************************
 *************************
-   Evaluating: Student
+ Evaluating: ID_Improved
 *************************
+
+Playing Matches:
+----------
+  Match 1: ID_Improved vs   Random    	Result: 18 to 2
+  Match 2: ID_Improved vs   MM_Null   	Result: 17 to 3
+  Match 3: ID_Improved vs   MM_Open   	Result: 12 to 8
+  Match 4: ID_Improved vs MM_Improved 	Result: 12 to 8
+  Match 5: ID_Improved vs   AB_Null   	Result: 12 to 8
+  Match 6: ID_Improved vs   AB_Open   	Result: 13 to 7
+  Match 7: ID_Improved vs AB_Improved 	Result: 12 to 8
+
+
+Results:
+----------
+ID_Improved         68.57%
 
 *************************
    Evaluating: Student
@@ -274,53 +369,22 @@ def evaluation_function6(game, player):
 
 Playing Matches:
 ----------
-  Match 1:   Student   vs   Random    	Result: 16 to 3
-  Match 2:   Student   vs   MM_Null   	Result: 14 to 6
-  Match 3:   Student   vs   MM_Open   	Result: 14 to 6
-  Match 4:   Student   vs MM_Improved 	Result: 16 to 4
-  Match 5:   Student   vs   AB_Null   	Result: 14 to 6
-  Match 6:   Student   vs   AB_Open   	Result: 15 to 5
-  Match 7:   Student   vs AB_Improved 	Result: 11 to 9
+  Match 1:   Student   vs   Random    	Result: 19 to 1
+  Match 2:   Student   vs   MM_Null   	Result: 17 to 3
+  Match 3:   Student   vs   MM_Open   	Result: 13 to 7
+  Match 4:   Student   vs MM_Improved 	Result: 9 to 11
+  Match 5:   Student   vs   AB_Null   	Result: 17 to 3
+  Match 6:   Student   vs   AB_Open   	Result: 13 to 7
+  Match 7:   Student   vs AB_Improved 	Result: 13 to 7
 
 
 Results:
 ----------
-Student             71.43%
+Student             72.14%
+
 
     """
-    if game.is_loser(player):
-        return float("-inf")
 
-    if game.is_winner(player):
-        return float("inf")
-
-    own_moves = len(game.get_legal_moves(player))
-    opp_moves = len(game.get_legal_moves(game.get_opponent(player)))
-
-    approx_depth = 49 - len(game.get_blank_spaces())
-
-    # get the position array
-    very_center_space = [(3, 3)]
-    center_spaces = [(2, 2), (2, 3), (2, 4),
-                     (3, 2), (3, 4),
-                     (4, 2), (4, 3), (4, 4), ]
-    #if its depth are less than four (my assumption), it's ALWAYS better to move to the center position
-    center_value = 0
-    # print(approx_depth)
-    # I don't want to check player's location every time, so I seperated two statements to different if statements.
-    #somehow the approx_depth print 3 for the depth of 1
-
-    if approx_depth == 3:
-        if game.get_player_location(player) in very_center_space:
-            center_value = 99999
-        elif game.get_player_location(player) in center_spaces:
-            # it's in center spaces and (own_moves-opp_moves)
-            # doesn't want to bother center_value
-            center_value = 0.5
-    # print(float(center_value + own_moves - opp_moves - approx_depth*0.01))
-    returnValue = float(center_value + own_moves - opp_moves - approx_depth*0.01)
-    # print(returnValue)
-    return returnValue
 
 class CustomPlayer:
     """Game-playing agent that chooses a move using your evaluation function
@@ -479,10 +543,7 @@ class CustomPlayer:
 
         legal_moves = game.get_legal_moves()
         if not legal_moves:
-            if maximizing_player == True:
-                return float("-inf"), (-1, -1)
-            else:
-                return float("inf"), (-1, -1)
+            return game.utility(self), (-1, -1)
         # Mini-Max Algorithm :
         # https://github.com/aimacode/aima-pseudocode/blob/master/md/Minimax-Decision.md
 
