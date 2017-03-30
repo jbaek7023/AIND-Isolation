@@ -40,7 +40,7 @@ python agent_test.py
 python tournament.py
 ```
 
-7. my analysis paper can be found (here)[heuristic_analysis.pdf]
+7. my analysis paper can be found [here][heuristic_analysis.pdf]
 
 
 
