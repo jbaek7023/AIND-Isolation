@@ -3,7 +3,7 @@
 ![Example game of isolation](viz.gif)
 
 # Intro 
-This is an adversarial search agent to play the game 'Isolation'. This project is for Artificial Intelligence Nanodegree from Udacity Online Course. 
+This is an adversarial search agent to play the game 'Isolation'. This project is for [Artificial Intelligence Nanodegree from Udacity](https://www.udacity.com/ai). 
 
 Isolation is a deterministic, two-player game of perfect information in which the players alternate turns moving a single piece from one cell to another on a board.  Whenever either player occupies a cell, that cell becomes blocked for the remainder of the game.  The first player with no remaining legal moves loses, and the opponent is declared the winner.
 
@@ -12,6 +12,36 @@ This project uses a version of Isolation where each agent is restricted to L-sha
 Additionally, agents will have a fixed time limit each turn to search for the best move and respond.  If the time limit expires during a player's turn, that player forfeits the match, and the opponent wins.
 
 These rules are implemented in the `isolation.Board` class provided in the repository. 
+
+## Setup & Run
+
+1. Download the whole project file and open the folder. 
+ 
+2. Create an Environment for the project
+```
+conda env create -f aind-environment-unix.yml
+```
+
+3. Enter the Environment
+```
+source activate aind
+```
+
+4. Test minimax, alphabeta pruning, fixed-depth, iteractive deepening 
+```
+python agent_test.py
+
+``` 
+
+5. To experiment different heuristic function, modify  custom_score(game, player) function (line 17 in game_agent.py). 
+
+6. Run games for analytics (this process can take a while)
+```
+python tournament.py
+```
+
+7. my analysis paper can be found (here)[heuristic_analysis.pdf]
+
 
 
 ## Quickstart Guide

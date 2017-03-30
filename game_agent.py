@@ -36,7 +36,7 @@ def custom_score(game, player):
     float
         The heuristic value of the current game state to the specified player.
     """
-    return evaluation_function6(game, player)
+    return evaluation_function1(game, player)
 
 
 
